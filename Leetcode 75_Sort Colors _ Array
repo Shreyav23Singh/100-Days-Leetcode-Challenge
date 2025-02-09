@@ -62,3 +62,16 @@ Only integer variables (count0, count1, count2) are used.
 No extra array → O(1) space complexity.
 
 3️⃣🚀. Optimal Solution
+
+
+But, Interviewer will say, hold on man, you are taking 2 Iterations i.e, O(2N) , but I don't need two Iteration. So, could you optimize it in 1 Iteration-
+
+We can it optimize further using the 💡💡Dutch National Flag Algorithm😎, which is an in-place single-pass O(n) solution.
+
+
+
+
+
+
+
+
