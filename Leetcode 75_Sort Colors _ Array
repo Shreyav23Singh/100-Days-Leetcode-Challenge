@@ -97,6 +97,16 @@ class Solution {
     }
 }
 
+Time Complexity (TC):
+The algorithm iterates through the array at most once using the while loop.
+Each element is processed only once, making it a single pass algorithm.
+The swapping operations are constant-time O(1).
+Thus, TC = O(N), where N is the length of the array.
+
+Space Complexity (SC):
+The algorithm sorts the array in-place, meaning it does not use any extra space apart from a few integer variables (low, mid, high, and temp).
+No additional data structures are used.
+Thus, SC = O(1).
 
 
 
