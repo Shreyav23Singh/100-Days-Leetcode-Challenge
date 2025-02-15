@@ -42,3 +42,38 @@ TC - O(n)
 SC - O(1)
 
 _________________________________________________________________________________Optimal__________________________________________
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int n= nums.length;
+
+        int low =0 , high = n-1, mid =0;
+
+        while(low <= high){
+            mid = low+ (high  - low) /2;
+
+            if( target == nums[mid]){
+                return mid;
+                
+            }else if(target < nums[mid]){
+                high = mid -1;
+                
+            }else{
+                low= mid + 1;
+            }
+        }
+
+    
+        return -1;
+
+        
+    }
+}
+
+⌚👩🏻‍💻Time Complexity
+Best Case: 𝑂(1)
+O(1) (If the target is found at mid in the first iteration)
+Worst Case: 𝑂(log𝑛)
+O(logn) (Binary search reduces search space by half each time)
+
+💫💡Space Complexity - O(1)
