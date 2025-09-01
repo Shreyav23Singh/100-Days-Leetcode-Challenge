@@ -23,3 +23,84 @@ class Solution {
         
     }
 }
+
+________________________________________________________________________________________________________________________________________________________________
+
+The Boyer–Moore Voting Algorithm is a clever algorithm to find the majority element (the element that appears more than ⌊n/2⌋ times) in O(n) time and O(1) space.
+🔹 Intuition
+
+✅🧑🏻‍💻Think of it as a voting system:
+
+Each element in the array is like a "vote".
+
+The majority element will always have more than half of the total votes.
+
+We keep a candidate and a count:
+
+If count is 0, we pick the current number as our candidate.
+
+If the current number is the same as the candidate, increment the count.
+
+Otherwise, decrement the count.
+
+At the end, the candidate will be the majority element.
+----------------------------------------------------------------------------------------------
+🔹 Steps
+
+Initialize:
+
+candidate = 0
+
+count = 0
+
+Traverse the array:
+
+If count == 0, set candidate = num
+
+If num == candidate, increment count
+
+Else, decrement count
+
+Return candidate (problem guarantees majority element exists).
+
+🔹 Example Walkthrough
+
+nums = [3, 2, 3]
+
+Start: candidate = 0, count = 0
+
+First element 3:
+count == 0 → candidate = 3
+count = 1
+
+Second element 2:
+num != candidate → count = 0
+
+Third element 3:
+count == 0 → candidate = 3
+count = 1
+
+✅ Final candidate = 3 → Majority element.
+----------------------------------------------------------------------------------------------
+
+Code 👩🏻‍💻🧑🏻‍💻💫✅
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        int candidate = 0 , count = 0;
+
+
+        for(int currentNumber : nums){
+            if(count == 0){
+                candidate = currentNumber;
+            }
+
+            count += (candidate == currentNumber) ? 1 : -1 ;
+
+        }
+        return candidate;
+        
+    }
+}
+
+In O(n) time and O(1) space.
