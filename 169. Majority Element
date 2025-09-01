@@ -164,7 +164,15 @@ class Solution {
         HashMap<Integer, Integer> map = new HashMap<>(); // Int == element , Integer = Count no of times ele appear
 
         for(int ele : nums){
-            map.put(ele , map.getOrDefault(ele, 0) + 1);
+            map.put(ele , map.getOrDefault(ele, 0) + 1); //  Update the count of ele in the map.
+
+// map.getOrDefault(ele, 0) → get the current count if it exists, otherwise use 0.
+
+/ Then add 1 to it.
+
+// Finally, put updates the map with the new count.
+
+// 👉 This single line replaces a long if-else:
 
             if(map.get(ele) > n/2){
                 return ele;
