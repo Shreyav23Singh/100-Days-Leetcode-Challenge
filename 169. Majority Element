@@ -104,3 +104,75 @@ class Solution {
 }
 
 In O(n) time and O(1) space.
+
+____________________________________________________________________Hashmap____________________________________________________________________________________________
+🔹 Why HashMap?
+
+The intent is simple:
+➡️ A HashMap lets us keep track of how many times each element appears in the array.
+
+So instead of brute force (where you check frequency by scanning the array again and again), we use a HashMap to store counts as we go.
+
+🔹 Step-by-step intent
+
+Take nums = [2,2,1,1,1,2,2]
+
+Create an empty HashMap<Integer, Integer> → map
+
+Traverse the array:
+
+For each number, increase its count in the map:
+
+map.put(num, map.getOrDefault(num, 0) + 1);
+
+While updating, check if this element’s frequency exceeds n/2.
+
+If yes → return immediately.
+
+If not, continue.
+
+At the end, the number with count > n/2 is your majority element.
+
+🔹 Example Dry Run
+
+nums = [3, 2, 3]
+
+Initially: map = {}
+
+Process 3 → map = {3=1}
+
+Process 2 → map = {3=1, 2=1}
+
+Process 3 → map = {3=2, 2=1}
+
+Check: count of 3 = 2 > n/2 = 1.5 → Majority = 3
+
+🔹 Pros & Cons of HashMap
+
+✅ Easy to understand, very intuitive
+✅ Works for arrays where a majority element may not exist (we can modify to return -1 if no element > n/2)
+
+❌ Uses O(n) extra space (not optimal compared to Boyer–Moore)
+❌ Slightly slower because of map operations
+
+💫💫💫Code💫💫💫
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        int n= nums.length;
+
+        HashMap<Integer, Integer> map = new HashMap<>(); // Int == element , Integer = Count no of times ele appear
+
+        for(int ele : nums){
+            map.put(ele , map.getOrDefault(ele, 0) + 1);
+
+            if(map.get(ele) > n/2){
+                return ele;
+            }
+        }
+        return -1;
+
+
+        
+    }
+}
