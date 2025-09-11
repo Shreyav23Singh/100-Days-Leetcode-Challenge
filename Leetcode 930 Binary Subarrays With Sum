@@ -1,0 +1,182 @@
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+
+        return countSubArrays(nums, goal) - countSubArrays(nums, goal - 1);
+    }
+
+     int countSubArrays(int[] nums, int goal){
+            if(goal < 0)
+            return 0;
+
+            int left = 0 , sum = 0 , ans = 0;
+            for( int right =0 ; right < nums.length ; right++){
+                sum += nums[right];
+
+                while(sum > goal){
+                    sum -= nums[left++];
+                }
+                ans += ( right - left + 1);
+            }
+            return ans;
+        
+
+        
+    }
+}
+_____________________________________________________________________________________________________________________________________________________________________
+
+🔎 Time Complexity (TC)
+
+The helper countSubarrays(nums, k) runs one sliding window:
+
+Each element is visited at most twice → once when right moves forward, once when left moves forward.
+
+So it’s O(n) for one call.
+
+Since we call it twice (goal and goal-1), total =
+
+O(2n) ≈ O(n)
+
+
+✅ TC = O(n)
+
+🔎 Space Complexity (SC)
+
+We only use a few variables: left, right, sum, count.
+
+No extra data structures (no HashMap, no prefix array).
+
+✅ SC = O(1)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+📊 Comparison with HashMap Prefix Sum Solution
+
+HashMap method:
+
+TC = O(n)
+
+SC = O(n) (stores prefix sums)
+
+Sliding window method (your corrected code):
+
+TC = O(n)
+
+SC = O(1)
+
+👉 For binary arrays (this problem), sliding window is strictly better in terms of space.
+___________________________________________________________________________________________________________________________________________________________________
+
+Input
+nums = [1,0,1,0,1]
+goal = 2
+
+Formula
+exactly(goal) = atMost(goal) - atMost(goal - 1)
+exactly(2) = atMost(2) - atMost(1)
+
+Step 1: Dry run atMost(nums, 2)
+
+We count subarrays with sum ≤ 2.
+
+Init: left=0, sum=0, count=0
+
+right=0 → nums[0]=1
+
+sum = 1 ≤ 2
+
+subarrays ending at right=0 = (0-0+1) = 1
+
+count = 1
+
+right=1 → nums[1]=0
+
+sum = 1 ≤ 2
+
+subarrays ending at right=1 = (1-0+1) = 2
+
+count = 3
+
+right=2 → nums[2]=1
+
+sum = 2 ≤ 2
+
+subarrays ending at right=2 = (2-0+1) = 3
+
+count = 6
+
+right=3 → nums[3]=0
+
+sum = 2 ≤ 2
+
+subarrays ending at right=3 = (3-0+1) = 4
+
+count = 10
+
+right=4 → nums[4]=1
+
+sum = 3 > 2 → shrink: subtract nums[0]=1 → left=1 → sum=2
+
+subarrays ending at right=4 = (4-1+1) = 4
+
+count = 14
+
+✅ atMost(2) = 14
+
+Step 2: Dry run atMost(nums, 1)
+
+Count subarrays with sum ≤ 1.
+
+Init: left=0, sum=0, count=0
+
+right=0 → nums[0]=1
+
+sum = 1 ≤ 1
+
+subarrays ending at right=0 = 1
+
+count = 1
+
+right=1 → nums[1]=0
+
+sum = 1 ≤ 1
+
+subarrays ending at right=1 = 2
+
+count = 3
+
+right=2 → nums[2]=1
+
+sum = 2 > 1 → shrink: subtract nums[0]=1 → left=1 → sum=1
+
+subarrays ending at right=2 = (2-1+1) = 2
+
+count = 5
+
+right=3 → nums[3]=0
+
+sum = 1 ≤ 1
+
+subarrays ending at right=3 = (3-1+1) = 3
+
+count = 8
+
+right=4 → nums[4]=1
+
+sum = 2 > 1 → shrink: subtract nums[1]=0 → still 2
+
+shrink again: subtract nums[2]=1 → left=3 → sum=1
+
+subarrays ending at right=4 = (4-3+1) = 2
+
+count = 10
+
+✅ atMost(1) = 10
+
+Step 3: Final Answer
+exactly(2) = atMost(2) - atMost(1)
+           = 14 - 10
+           = 4
+
+
+✅ Output = 4, which matches the expected result.
